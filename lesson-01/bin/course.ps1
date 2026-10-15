@@ -20,17 +20,29 @@ if (Test-Path (Join-Path $here '..\versions.env')) {
 }
 
 $version = $null
+$repository = $null
 foreach ($line in Get-Content $pins) {
     if ($line -match '^TOOLCHAIN_VERSION=(.+)$') { $version = $Matches[1].Trim() }
+    if ($line -match '^IMAGE_REPOSITORY=(.+)$') { $repository = $Matches[1].Trim() }
 }
 if (-not $version) { throw "TOOLCHAIN_VERSION not found in $pins" }
+if (-not $repository) { throw "IMAGE_REPOSITORY not found in $pins" }
 
-$image  = if ($env:COURSE_IMAGE)  { $env:COURSE_IMAGE }  else { "embedded-iot-course:$version" }
 $engine = if ($env:COURSE_ENGINE) { $env:COURSE_ENGINE } else { 'docker' }
+$localImage = ($repository -replace '^.*/', '') + ":$version"
+$publishedImage = "${repository}:$version"
+
+# Image: COURSE_IMAGE, else the locally built tag, else the published one.
+if ($env:COURSE_IMAGE) {
+    $image = $env:COURSE_IMAGE
+} else {
+    & $engine image inspect $localImage *> $null
+    $image = if ($LASTEXITCODE -eq 0) { $localImage } else { $publishedImage }
+}
 
 & $engine image inspect $image *> $null
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "image $image not found. Load it with: docker load -i <file>.tar.gz"
+    Write-Error "image $image not found. Download it once with: $engine pull $publishedImage"
     exit 2
 }
 

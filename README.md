@@ -24,9 +24,10 @@ cd lesson-01
 
 Then follow `lesson-01/README.md`.
 
-Lesson 01 uses the course container image `embedded-iot-course:0.1.0`.
-The image is distributed separately through the course/laboratory environment;
-the repository contains the launchers used to run the lesson commands.
+Lesson 01 uses the course container image, published as
+`ghcr.io/esd-univr/embedded-iot-course:0.1.0` (about 1 GB, downloaded once with
+`docker pull`, see Part 0 of the lesson handout). The repository contains the
+launchers used to run the lesson commands.
 
 ## Repository structure
 

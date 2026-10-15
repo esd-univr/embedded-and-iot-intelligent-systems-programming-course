@@ -31,12 +31,23 @@ fi
 # shellcheck disable=SC1090
 . "$pins"
 
-IMAGE="${COURSE_IMAGE:-embedded-iot-course:${TOOLCHAIN_VERSION}}"
 ENGINE="${COURSE_ENGINE:-docker}"
 WORKDIR="${COURSE_WORKDIR:-/work}"
 
+# Image: COURSE_IMAGE, else the locally built tag, else the published one.
+local_image="${IMAGE_REPOSITORY##*/}:${TOOLCHAIN_VERSION}"
+published_image="${IMAGE_REPOSITORY}:${TOOLCHAIN_VERSION}"
+if [ -n "${COURSE_IMAGE:-}" ]; then
+  IMAGE="$COURSE_IMAGE"
+elif "$ENGINE" image inspect "$local_image" >/dev/null 2>&1; then
+  IMAGE="$local_image"
+else
+  IMAGE="$published_image"
+fi
+
 if ! "$ENGINE" image inspect "$IMAGE" >/dev/null 2>&1; then
-  echo "error: image $IMAGE not found. Build it with: make -C toolchain build" >&2
+  echo "error: image $IMAGE not found. Download it once with:" >&2
+  echo "       $ENGINE pull $published_image" >&2
   exit 2
 fi
 

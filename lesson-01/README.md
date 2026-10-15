@@ -4,7 +4,7 @@ Checklist for the lab. The slides explain the concepts; this file lists what to 
 and what to record. Commands start with `./bin/course` (Windows: `bin\course.cmd`).
 
 Needs: Pico 2 WH, micro-USB data cable, 1 LED, 1 resistor (220 ohm), breadboard,
-Docker with the course image `embedded-iot-course:0.1.0`, a serial terminal.
+Docker, a serial terminal.
 
 | | Linux | macOS | Windows |
 | --- | --- | --- | --- |
@@ -16,6 +16,8 @@ On Windows keep this folder on a Windows drive, not inside WSL.
 
 ## Part 0 - Environment
 
+- [ ] Docker is running
+- [ ] Download the course image once (about 1 GB): `docker pull ghcr.io/esd-univr/embedded-iot-course:0.1.0`
 - [ ] `./bin/course doctor` ends with `doctor: PASS`
 - [ ] Zephyr version: ________  SDK version: ________
 
