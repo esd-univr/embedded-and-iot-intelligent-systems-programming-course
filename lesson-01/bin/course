@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Run a command in the course toolchain container with a repository checkout
+# (or a lesson student workspace) mounted at /work.
+#
+#   course                      interactive shell
+#   course west build ...       run one command
+#   course doctor               check the toolchain
+#
+# Env: COURSE_IMAGE (default embedded-iot-course:<TOOLCHAIN_VERSION>)
+#      COURSE_ENGINE (default docker)
+# The container needs no USB access: flash with UF2 copy and read the serial
+# port on the host (see the lab handout).
+set -euo pipefail
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Course checkout: bin/ lives in toolchain/. Student package: bin/ is at the root.
+if [ -f "$here/../versions.env" ]; then
+  root="$(cd "$here/../.." && pwd)"; pins="$here/../versions.env"
+else
+  root="$(cd "$here/.." && pwd)"; pins="$here/versions.env"
+fi
+# shellcheck disable=SC1090
+. "$pins"
+
+IMAGE="${COURSE_IMAGE:-embedded-iot-course:${TOOLCHAIN_VERSION}}"
+ENGINE="${COURSE_ENGINE:-docker}"
+WORKDIR="${COURSE_WORKDIR:-/work}"
+
+if ! "$ENGINE" image inspect "$IMAGE" >/dev/null 2>&1; then
+  echo "error: image $IMAGE not found. Build it with: make -C toolchain build" >&2
+  exit 2
+fi
+
+tty=()
+[ -t 0 ] && [ -t 1 ] && tty=(-it)
+
+# Start in the same relative directory inside the container.
+rel="${PWD#"$root"}"
+case "$PWD" in "$root"|"$root"/*) workdir="$WORKDIR$rel" ;; *) workdir="$WORKDIR" ;; esac
+
+if [ "$#" -eq 0 ]; then set -- bash -l; fi
+if [ "$1" = doctor ]; then set -- course-doctor; fi
+
+exec "$ENGINE" run --rm ${tty[@]+"${tty[@]}"} \
+  --user "$(id -u):$(id -g)" \
+  -v "$root:$WORKDIR" -w "$workdir" \
+  -e HOME=/tmp/home \
+  "$IMAGE" "$@"

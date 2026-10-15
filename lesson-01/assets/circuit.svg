@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" role="img" aria-labelledby="t d" font-family="IBM Plex Mono, Consolas, monospace" font-size="26">
+<title id="t">LED wiring on the Raspberry Pi Pico 2 WH</title><desc id="d">GP15 on physical pin 20 goes through a 220 ohm resistor to the LED anode. The LED cathode goes to GND on physical pin 18.</desc>
+<rect x="470" y="8" width="322" height="324" fill="#eaecf5" stroke="#141a2e" stroke-width="2"/>
+<text x="494" y="36" fill="#5a6383" font-size="20">pins 1-16 above</text>
+<circle cx="470" cy="60" r="9" fill="#fff" stroke="#141a2e" stroke-width="2"/>
+<text x="498" y="69" fill="#141a2e" font-weight="400">17  GP13</text>
+<circle cx="470" cy="130" r="9" fill="#141a2e" stroke="#141a2e" stroke-width="2"/>
+<text x="498" y="139" fill="#141a2e" font-weight="600">18  GND</text>
+<circle cx="470" cy="200" r="9" fill="#fff" stroke="#141a2e" stroke-width="2"/>
+<text x="498" y="209" fill="#141a2e" font-weight="400">19  GP14</text>
+<circle cx="470" cy="270" r="9" fill="#9d3e91" stroke="#141a2e" stroke-width="2"/>
+<text x="498" y="279" fill="#9d3e91" font-weight="600">20  GP15</text>
+<g stroke="#9d3e91" stroke-width="4" fill="none"><path d="M461 270 H400"/><path d="M300 270 H225 V232"/></g>
+<path d="M225 192 V130 H461" stroke="#141a2e" stroke-width="4" fill="none"/>
+<rect x="300" y="250" width="100" height="40" fill="#fff" stroke="#141a2e" stroke-width="3"/>
+<text x="350" y="330" text-anchor="middle" fill="#141a2e" font-weight="600" font-size="26">220 Ω</text>
+<path d="M200 232 H250 L225 190 Z" fill="#f1e8f1" stroke="#141a2e" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M198 186 H252" stroke="#141a2e" stroke-width="4"/>
+<path d="M262 206 l18 -18 M270 220 l18 -18" stroke="#141a2e" stroke-width="3"/>
+<text x="8" y="168" fill="#5a6383" font-size="22">cathode</text><text x="8" y="192" fill="#5a6383" font-size="22">(short leg)</text>
+<text x="8" y="228" fill="#5a6383" font-size="22">anode</text><text x="8" y="252" fill="#5a6383" font-size="22">(long leg)</text>
+</svg>

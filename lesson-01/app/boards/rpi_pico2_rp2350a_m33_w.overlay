@@ -1,0 +1,20 @@
+/*
+ * Lab 1: one external LED on GP15 (pin 20 of the Pico header),
+ * wired GP15 -> 220 ohm resistor -> LED anode, LED cathode -> GND (pin 18).
+ *
+ * The Pico 2 W's on-board LED is driven by the Wi-Fi chip, not by an RP2350
+ * pin, so it is not used in this lab.
+ */
+/ {
+	aliases {
+		led0 = &lab_led;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		lab_led: led_0 {
+			gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
+		};
+	};
+};

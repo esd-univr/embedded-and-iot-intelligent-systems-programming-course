@@ -1,0 +1,14 @@
+# Editor / OS files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Zephyr / CMake build artifacts
+build/
+.out/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
