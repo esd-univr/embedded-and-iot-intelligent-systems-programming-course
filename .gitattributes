@@ -1,0 +1,5 @@
+# The launcher runs in Linux/macOS shells and containers: keep LF on every OS.
+lesson-*/bin/course text eol=lf
+lesson-*/bin/versions.env text eol=lf
+# Windows batch file: keep CRLF.
+*.cmd text eol=crlf
