@@ -6,11 +6,20 @@
 #   course west build ...       run one command
 #   course doctor               check the toolchain
 #
+# Inside the course container itself it just runs the command.
 # Env: COURSE_IMAGE (default embedded-iot-course:<TOOLCHAIN_VERSION>)
 #      COURSE_ENGINE (default docker)
 # The container needs no USB access: flash with UF2 copy and read the serial
 # port on the host (see the lab handout).
 set -euo pipefail
+
+# Already inside the course container (a dev container or Codespace): there is
+# no Docker to call, so run the command directly.
+if [ -f /etc/course-pins ] && [ -n "${ZEPHYR_BASE:-}" ]; then
+  if [ "$#" -eq 0 ]; then set -- bash -l; fi
+  if [ "$1" = doctor ]; then set -- course-doctor; fi
+  exec "$@"
+fi
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Course checkout: bin/ lives in toolchain/. Student package: bin/ is at the root.
