@@ -1,0 +1,11 @@
+{
+  "name": "Embedded and IoT course (Zephyr v4.4.2, SDK 1.0.1)",
+  "image": "ghcr.io/esd-univr/embedded-iot-course:0.1.0",
+  "hostRequirements": { "cpus": 2 },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-vscode.cpptools"]
+    }
+  },
+  "postCreateCommand": "./lesson-01/bin/course doctor"
+}
