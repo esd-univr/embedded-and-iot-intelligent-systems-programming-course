@@ -36,7 +36,7 @@ On Windows keep this folder on a Windows drive, not inside a WSL distribution (W
 - [ ] `build/zephyr/` contains `zephyr.elf`, `.bin`, `.hex`, `.uf2`, `.map`
 - [ ] `./bin/course arm-zephyr-eabi-size build/zephyr/zephyr.elf` - flash used (`text` + `data`, not `dec`; the `FLASH:` line of the build output agrees): ________ bytes
 - [ ] `./bin/course arm-zephyr-eabi-readelf -h build/zephyr/zephyr.elf` - Machine: ________
-- [ ] `./bin/course grep ' main$' build/zephyr/zephyr.map` - address of `main`: ________
+- [ ] `./bin/course grep " main$" build/zephyr/zephyr.map` - address of `main`: ________
 
 ## Part 3 - Flash and observe
 

@@ -36,7 +36,7 @@ Su Windows tenere questa cartella su un disco Windows, non dentro una distribuzi
 - [ ] `build/zephyr/` contiene `zephyr.elf`, `.bin`, `.hex`, `.uf2`, `.map`
 - [ ] `./bin/course arm-zephyr-eabi-size build/zephyr/zephyr.elf` - flash usata (`text` + `data`, non `dec`; la riga `FLASH:` dell'output della build coincide): ________ byte
 - [ ] `./bin/course arm-zephyr-eabi-readelf -h build/zephyr/zephyr.elf` - Machine: ________
-- [ ] `./bin/course grep ' main$' build/zephyr/zephyr.map` - indirizzo di `main`: ________
+- [ ] `./bin/course grep " main$" build/zephyr/zephyr.map` - indirizzo di `main`: ________
 
 ## Parte 3 - Flash e osservazione
 

@@ -75,7 +75,7 @@ $cwd = (Get-Location).Path
 $workdir = '/work'
 if ($cwd -eq $root) {
     $workdir = '/work'
-} elseif ($cwd.StartsWith($root + '\')) {
+} elseif ($cwd.StartsWith($root + '\', [System.StringComparison]::OrdinalIgnoreCase)) {
     $workdir = '/work/' + $cwd.Substring($root.Length + 1).Replace('\', '/')
 }
 

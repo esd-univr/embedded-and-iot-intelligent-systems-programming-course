@@ -28,8 +28,8 @@ if [ -f "$here/../versions.env" ]; then
 else
   root="$(cd "$here/.." && pwd)"; pins="$here/versions.env"
 fi
-# shellcheck disable=SC1090
-. "$pins"
+# Read the pins; tolerate CRLF line endings from a Windows checkout.
+eval "$(tr -d '\r' < "$pins")"
 
 ENGINE="${COURSE_ENGINE:-docker}"
 if ! command -v "$ENGINE" >/dev/null 2>&1; then
