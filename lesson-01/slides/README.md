@@ -1,6 +1,6 @@
 # Lesson 01 slides
 
-English and Italian versions of the same deck (same 29 slides):
+English and Italian versions of the same deck (same 30 slides):
 
 - `lab01-slides.pdf` and `lab01-slides.it.pdf`: the decks as presented in class.
 - `lab01.md` and `lab01.it.md`: the Markdown sources ([Marp](https://marp.app/)).

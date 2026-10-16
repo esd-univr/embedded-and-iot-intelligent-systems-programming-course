@@ -349,6 +349,24 @@ Which architecture? Flash used = `text` + `data`: how much of the 4 MB?
 
 ---
 
+<!-- _class: do -->
+
+# Reading the serial port
+
+The board appears on the computer as a serial port: a device name that a terminal program can open and read. The program on the board writes its log into it, and the terminal prints what arrives.
+
+```text
+Linux     /dev/ttyACM0         picocom -b 115200 /dev/ttyACM0
+macOS     /dev/cu.usbmodem*    screen /dev/cu.usbmodem* 115200
+Windows   COMx                 PuTTY or Tera Term, Serial, 115200
+```
+
+<p class="small">115200 is a setting terminals ask for. Opening the port also starts the log.</p>
+
+<p class="meta">Handout · Part 3</p>
+
+---
+
 # Observing a running program
 
 <div class="columns"><div>

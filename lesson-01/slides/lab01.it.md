@@ -354,6 +354,24 @@ Quale architettura? Flash usata = `text` + `data`: quanto dei 4 MB?
 
 ---
 
+<!-- _class: do -->
+
+# Leggere la porta seriale
+
+La scheda appare sul computer come una porta seriale: un nome di dispositivo che un programma terminale può aprire e leggere. Il programma sulla scheda vi scrive il log, e il terminale stampa ciò che arriva.
+
+```text
+Linux     /dev/ttyACM0         picocom -b 115200 /dev/ttyACM0
+macOS     /dev/cu.usbmodem*    screen /dev/cu.usbmodem* 115200
+Windows   COMx                 PuTTY o Tera Term, Serial, 115200
+```
+
+<p class="small">115200 è un'impostazione che i terminali chiedono. Aprire la porta fa partire anche il log.</p>
+
+<p class="meta">Traccia · Parte 3</p>
+
+---
+
 # Osservare un programma in esecuzione
 
 <div class="columns"><div>
