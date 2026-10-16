@@ -29,6 +29,11 @@ if (-not $version) { throw "TOOLCHAIN_VERSION not found in $pins" }
 if (-not $repository) { throw "IMAGE_REPOSITORY not found in $pins" }
 
 $engine = if ($env:COURSE_ENGINE) { $env:COURSE_ENGINE } else { 'docker' }
+if (-not (Get-Command $engine -ErrorAction SilentlyContinue)) {
+    Write-Host "error: '$engine' was not found. Install Docker Desktop, start it, then open a new terminal."
+    Write-Host "       https://www.docker.com/products/docker-desktop/"
+    exit 2
+}
 $localImage = ($repository -replace '^.*/', '') + ":$version"
 $publishedImage = "${repository}:$version"
 

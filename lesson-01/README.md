@@ -9,14 +9,14 @@ Docker, a serial terminal.
 | | Linux | macOS | Windows |
 | --- | --- | --- | --- |
 | BOOTSEL drive | `/media/$USER/RP2350` | `/Volumes/RP2350` | new drive letter |
-| Serial port | `/dev/ttyACM0` (group `dialout`) | `/dev/cu.usbmodem*` | `COMx` |
+| Serial port | `/dev/ttyACM0` (group `dialout`) | `/dev/cu.usbmodem*` | `COMx`: Device Manager, Ports, "USB Serial Device" (no driver to install) |
 | Terminal | `picocom /dev/ttyACM0` | `screen /dev/cu.usbmodem* 115200` | PuTTY / Tera Term, 115200 |
 
 On Windows keep this folder on a Windows drive, not inside WSL.
 
 ## Part 0 - Environment
 
-- [ ] Docker is running
+- [ ] Docker is installed and running (`docker --version` works; Windows and macOS: Docker Desktop)
 - [ ] Download the course image once (about 1 GB): `docker pull ghcr.io/esd-univr/embedded-iot-course:0.1.0`
 - [ ] `./bin/course doctor` ends with `doctor: PASS`
 - [ ] Zephyr version: ________  SDK version: ________

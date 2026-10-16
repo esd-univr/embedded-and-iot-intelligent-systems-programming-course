@@ -32,6 +32,10 @@ fi
 . "$pins"
 
 ENGINE="${COURSE_ENGINE:-docker}"
+if ! command -v "$ENGINE" >/dev/null 2>&1; then
+  echo "error: '$ENGINE' was not found. Install Docker (Docker Desktop on macOS), start it, then retry." >&2
+  exit 2
+fi
 WORKDIR="${COURSE_WORKDIR:-/work}"
 
 # Image: COURSE_IMAGE, else the locally built tag, else the published one.
