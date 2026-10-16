@@ -41,6 +41,7 @@ On Windows keep this folder on a Windows drive, not inside WSL.
 - [ ] With the USB cable unplugged, wire the LED as in `assets/circuit.svg`: **GP15 = physical pin 20** (not pin 15), GND = pin 18.
       Hold the board with the USB connector at the top: pin 1 is top-left, pin 20 bottom-left
 - [ ] Hold BOOTSEL, plug in USB, release: drive `RP2350` appears (Linux: if it is not listed, click it in the file manager to mount it)
+      A brand-new board shows the `RP2350` drive on its own the first time. Once it has run a program, the drive appears only if BOOTSEL is held while plugging in: this applies to every later flash
 - [ ] Copy `build/zephyr/zephyr.uf2` to the drive with the file manager or `cp`; the drive disappears and the board restarts by itself: this is normal
 - [ ] Open the serial port at 115200 (`picocom -b 115200 /dev/ttyACM0`; quit with Ctrl-A Ctrl-X. `screen`: Ctrl-A then K)
 - [ ] Lines `toggle N: asked 1000 ms, measured ... us` appear
