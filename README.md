@@ -22,7 +22,8 @@ For Lesson 01:
 cd lesson-01
 ```
 
-Then follow `lesson-01/README.md`.
+Then follow `lesson-01/README.md` (Italian: `lesson-01/README.it.md`). The slides are in
+`lesson-01/slides/` in English and Italian.
 
 ## Course container image
 
