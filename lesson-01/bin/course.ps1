@@ -9,6 +9,18 @@
 # Keep the folder on a Windows drive (not inside a WSL distribution).
 $ErrorActionPreference = 'Stop'
 
+# Windows PowerShell 5.1 turns anything a native command writes to stderr into a
+# terminating error under 'Stop', even when redirected, so `docker image inspect`
+# on a missing image would abort the script. Run native probes with 'Continue'
+# and look at the exit code only.
+function Test-Native {
+    param([scriptblock]$Block)
+    $previous = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try { & $Block *> $null; return ($LASTEXITCODE -eq 0) }
+    finally { $ErrorActionPreference = $previous }
+}
+
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 # Course checkout: bin\ lives in toolchain\. Student package: bin\ is at the root.
 if (Test-Path (Join-Path $here '..\versions.env')) {
@@ -37,8 +49,7 @@ if (-not (Get-Command $engine -ErrorAction SilentlyContinue)) {
 $localImage = ($repository -replace '^.*/', '') + ":$version"
 $publishedImage = "${repository}:$version"
 
-& $engine info *> $null
-if ($LASTEXITCODE -ne 0) {
+if (-not (Test-Native { & $engine info })) {
     Write-Host "error: Docker is installed but its engine is not running."
     Write-Host "       Start Docker Desktop and wait until it says the engine is running, then retry."
     Write-Host "       If it reports an engine or WSL 2 error (for example dockerDesktopLinuxEngine),"
@@ -51,13 +62,11 @@ if ($LASTEXITCODE -ne 0) {
 if ($env:COURSE_IMAGE) {
     $image = $env:COURSE_IMAGE
 } else {
-    & $engine image inspect $localImage *> $null
-    $image = if ($LASTEXITCODE -eq 0) { $localImage } else { $publishedImage }
+    $image = if (Test-Native { & $engine image inspect $localImage }) { $localImage } else { $publishedImage }
 }
 
-& $engine image inspect $image *> $null
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "image $image not found. Download it once with: $engine pull $publishedImage"
+if (-not (Test-Native { & $engine image inspect $image })) {
+    Write-Host "error: image $image not found. Download it once with: $engine pull $publishedImage"
     exit 2
 }
 
@@ -78,5 +87,6 @@ $tty = @()
 if (-not [Console]::IsInputRedirected -and -not [Console]::IsOutputRedirected) { $tty = @('-it') }
 
 # No --user: Docker Desktop maps file ownership of bind mounts itself.
+$ErrorActionPreference = 'Continue'
 & $engine run --rm @tty -v "${root}:/work" -w $workdir -e HOME=/tmp/home $image @cmd
 exit $LASTEXITCODE
