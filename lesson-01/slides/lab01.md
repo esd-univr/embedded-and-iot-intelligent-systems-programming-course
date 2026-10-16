@@ -129,9 +129,9 @@ Connecting an LED, through a resistor, to an output pin lets the program turn th
 
 # Two numbers for every pin
 
-Each GPIO pin of the Pico has two numbers. The **physical pin** is its position along the edge of the board, from 1 to 40; power and ground pins have a position but no GPIO name. The **GPIO name**, such as GP15, is the identifier that the software uses.
+Each GPIO pin has two numbers: the **physical pin**, its position along the edge of the board (1 to 40), and the **GPIO name**, such as GP15, which the software uses. Power and ground pins have a position but no GPIO name.
 
-The two numbers are unrelated. In this lab the LED is driven by GP15, which is physical pin 20, while physical pin 15 is GP11. Mixing them up is an easy wiring mistake.
+The two numbers are unrelated. The LED is driven by GP15, which is physical pin 20, while physical pin 15 is GP11. Mixing them up is an easy wiring mistake.
 
 ```text
 physical pin 20  =  GP15   (LED, through the resistor)
@@ -402,18 +402,16 @@ This loop repeats in every lab.
 
 # Requested time and actual time
 
-```c
-k_msleep(1000);
-```
-
 ```text
+k_msleep(1000);
+
 asked:    1000 ms
 measured: 1000043 us
 ```
 
-The measured interval starts before the toggle and ends after the sleep returns, so it covers both.
+The interval starts before the toggle and ends after the sleep returns, so it covers both.
 
-Collect 20 lines. Record the smallest and the largest error, and one reason why `measured` is not exactly `asked`.
+Collect 20 lines. Record the smallest and largest error, and one reason for it.
 
 <p class="meta">Handout · Part 5</p>
 
