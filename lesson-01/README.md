@@ -14,11 +14,11 @@ Docker, a serial terminal.
 | Serial port | `/dev/ttyACM0` (group `dialout`) | `/dev/cu.usbmodem*` | `COMx`: Device Manager, Ports, "USB Serial Device" (no driver to install) |
 | Terminal | `picocom /dev/ttyACM0` | `screen /dev/cu.usbmodem* 115200` | PuTTY / Tera Term, 115200 |
 
-On Windows keep this folder on a Windows drive, not inside WSL.
+On Windows keep this folder on a Windows drive, not inside a WSL distribution (WSL 2 itself must still be installed for Docker Desktop).
 
 ## Part 0 - Environment
 
-- [ ] Docker is installed and running (`docker --version` works; Windows and macOS: Docker Desktop)
+- [ ] Docker is installed and running (`docker --version` works; Windows and macOS: Docker Desktop; Windows also needs WSL 2: `wsl --install` in an administrator PowerShell, then restart)
 - [ ] Download the course image once (about 1 GB): `docker pull ghcr.io/esd-univr/embedded-iot-course:0.1.0`
 - [ ] `./bin/course doctor` ends with `doctor: PASS`
 - [ ] Zephyr version: ________  SDK version: ________

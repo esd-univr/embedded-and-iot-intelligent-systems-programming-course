@@ -37,6 +37,16 @@ if (-not (Get-Command $engine -ErrorAction SilentlyContinue)) {
 $localImage = ($repository -replace '^.*/', '') + ":$version"
 $publishedImage = "${repository}:$version"
 
+& $engine info *> $null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "error: Docker is installed but its engine is not running."
+    Write-Host "       Start Docker Desktop and wait until it says the engine is running, then retry."
+    Write-Host "       If it reports an engine or WSL 2 error (for example dockerDesktopLinuxEngine),"
+    Write-Host "       install WSL 2: run 'wsl --install' in an administrator PowerShell, restart the"
+    Write-Host "       computer, and start Docker Desktop again. You do not need to use WSL yourself."
+    exit 2
+}
+
 # Image: COURSE_IMAGE, else the locally built tag, else the published one.
 if ($env:COURSE_IMAGE) {
     $image = $env:COURSE_IMAGE

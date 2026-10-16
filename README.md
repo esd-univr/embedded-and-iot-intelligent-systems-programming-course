@@ -56,8 +56,11 @@ Docker, tell the instructor: an offline copy of the image can be loaded with
 
 ### Windows
 
-1. Install Docker Desktop (default WSL 2 backend), restart if it asks, then start
-   it and wait until it reports that the engine is running.
+1. Install WSL 2 first: open PowerShell **as administrator**, run `wsl --install`
+   and restart the computer. Docker Desktop needs it to run its Linux engine, even
+   if you never use WSL yourself; without it Docker fails with an error mentioning
+   `dockerDesktopLinuxEngine`. Then install Docker Desktop, start it, and wait until
+   it reports that the engine is running.
 2. Keep this repository on a normal Windows drive (for example
    `C:\Users\<you>\...`), not inside a WSL distribution, and open **PowerShell**
    in it. USB devices are not shared with WSL.

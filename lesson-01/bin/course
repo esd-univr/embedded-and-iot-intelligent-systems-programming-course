@@ -37,6 +37,10 @@ if ! command -v "$ENGINE" >/dev/null 2>&1; then
   exit 2
 fi
 WORKDIR="${COURSE_WORKDIR:-/work}"
+if ! "$ENGINE" info >/dev/null 2>&1; then
+  echo "error: Docker is installed but its engine is not running. Start Docker (Desktop on macOS), wait until it is ready, then retry." >&2
+  exit 2
+fi
 
 # Image: COURSE_IMAGE, else the locally built tag, else the published one.
 local_image="${IMAGE_REPOSITORY##*/}:${TOOLCHAIN_VERSION}"
