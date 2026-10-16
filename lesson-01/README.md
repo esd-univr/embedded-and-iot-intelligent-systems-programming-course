@@ -1,5 +1,7 @@
 # Lab 1 - From source code to a running embedded system
 
+Italian version: [README.it.md](README.it.md).
+
 Checklist for the lab. The slides explain the concepts; this file lists what to do
 and what to record. Commands start with `./bin/course` (Windows: `bin\course.cmd`).
 

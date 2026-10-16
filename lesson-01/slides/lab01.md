@@ -276,8 +276,6 @@ linker ─┬─► zephyr.elf ─┬─► zephyr.bin   raw bytes
 
 ---
 
-<!-- _class: do -->
-
 <!-- _class: prose -->
 
 # Reading the size output
